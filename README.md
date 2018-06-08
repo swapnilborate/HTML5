@@ -38,7 +38,7 @@ you can get more detail infomation by reading the following articles, hope it he
 
 https://i.stack.imgur.com/bAzG0.png
 
-#JavaScript Interfaces:
+# Javascript Interfaces:
 
 Though JavaScript does not have the interface type, it is often times needed. For reasons relating to JavaScript's dynamic nature and use of Prototypical-Inheritance, it is difficult to ensure consistent interfaces across classes -- however, it is possible to do so; and frequently emulated.
 
@@ -79,13 +79,14 @@ var ConcreteImplementation = function ConcreteImplementation() {
     //Applies Interface (Implement iAbstractClass Interface)
     iAbstractClass.apply(this);  // .call / .apply after precept definitions
 };
-Drawbacks
+
+# Drawbacks
 
 Though this helps implement consistency throughout your software to a significant degree, it does not implement true interfaces -- but emulates them. Though definitions, defaults, and warnings or errors are explicated, the explication of use is enforced & asserted by the developer (as with much of JavaScript development).
 
 This is seemingly the best approach to "Interfaces in JavaScript", however, I would love to see the following resolved:
 
-Assertions of return types
-Assertions of signatures
-Freeze objects from delete actions
-Assertions of anything else prevalent or needed in the specificity of the JavaScript community
+- Assertions of return types
+- Assertions of signatures
+- Freeze objects from delete actions
+- Assertions of anything else prevalent or needed in the specificity of the JavaScript community
