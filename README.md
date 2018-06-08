@@ -37,3 +37,55 @@ user-scalable=no to prevent the user from zooming in or zooming out.
 you can get more detail infomation by reading the following articles, hope it helpful for you!
 
 https://i.stack.imgur.com/bAzG0.png
+
+#JavaScript Interfaces:
+
+Though JavaScript does not have the interface type, it is often times needed. For reasons relating to JavaScript's dynamic nature and use of Prototypical-Inheritance, it is difficult to ensure consistent interfaces across classes -- however, it is possible to do so; and frequently emulated.
+
+At this point, there are handfuls of particular ways to emulate Interfaces in JavaScript; variance on approaches usually satisfies some needs, while others are left unaddressed. Often times, the most robust approach is overly cumbersome and stymies the implementor (developer).
+
+Here is an approach to Interfaces / Abstract Classes that is not very cumbersome, is explicative, keeps implementations inside of Abstractions to a minimum, and leaves enough room for dynamic or custom methodologies:
+
+function resolvePrecept(interfaceName) {
+    var interfaceName = interfaceName;
+    return function curry(value) {
+        /*      throw new Error(interfaceName + ' requires an implementation for ...');     */
+        console.warn('%s requires an implementation for ...', interfaceName);
+        return value;
+    };
+}
+var iAbstractClass = function AbstractClass() {
+    var defaultTo = resolvePrecept('iAbstractClass');
+
+    this.datum1 = this.datum1 || defaultTo(new Number());
+    this.datum2 = this.datum2 || defaultTo(new String());
+
+    this.method1 = this.method1 || defaultTo(new Function('return new Boolean();'));
+    this.method2 = this.method2 || defaultTo(new Function('return new Object();'));
+
+};
+var ConcreteImplementation = function ConcreteImplementation() {
+
+    this.datum1 = 1;
+    this.datum2 = 'str';
+
+    this.method1 = function method1() {
+        return true;
+    };
+    this.method2 = function method2() {
+        return {};
+    };
+
+    //Applies Interface (Implement iAbstractClass Interface)
+    iAbstractClass.apply(this);  // .call / .apply after precept definitions
+};
+Drawbacks
+
+Though this helps implement consistency throughout your software to a significant degree, it does not implement true interfaces -- but emulates them. Though definitions, defaults, and warnings or errors are explicated, the explication of use is enforced & asserted by the developer (as with much of JavaScript development).
+
+This is seemingly the best approach to "Interfaces in JavaScript", however, I would love to see the following resolved:
+
+Assertions of return types
+Assertions of signatures
+Freeze objects from delete actions
+Assertions of anything else prevalent or needed in the specificity of the JavaScript community
